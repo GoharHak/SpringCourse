@@ -2,6 +2,7 @@ package com.example.springcource.utils;
 
 import com.example.springcource.dao.PersonDAO;
 import com.example.springcource.models.Person;
+import com.example.springcource.services.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -10,11 +11,11 @@ import org.springframework.validation.Validator;
 @Component
 public class PersonValidator implements Validator {
 
-    private final PersonDAO personDAO;
+    private final PeopleService peopleService;
 
     @Autowired
-    public PersonValidator(PersonDAO personDAO) {
-        this.personDAO = personDAO;
+    public PersonValidator(PeopleService peopleService) {
+        this.peopleService = peopleService;
     }
 
     @Override
@@ -25,7 +26,7 @@ public class PersonValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Person person = (Person) o;
-        if(personDAO.getPersonByFullName(person.getFullName()).isPresent()){
+        if(peopleService.getPersonByFullName(person.getFullName()).isPresent()){
             errors.rejectValue("fullName","","Person with this name  already exists");
         }
     }
