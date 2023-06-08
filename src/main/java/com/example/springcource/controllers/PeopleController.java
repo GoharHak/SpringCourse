@@ -1,6 +1,5 @@
 package com.example.springcource.controllers;
 
-import com.example.springcource.dao.PersonDAO;
 import com.example.springcource.models.Person;
 import com.example.springcource.services.PeopleService;
 import com.example.springcource.utils.PersonValidator;
